@@ -42,7 +42,8 @@ public sealed class RandomArtifactSpriteSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, RandomArtifactSpriteComponent component, MapInitEvent args)
     {
-        var randomSprite = _random.Next(component.MinSprite, component.MaxSprite + 1);
+        var artiType = EntityManager.GetComponent<ArtifactComponent>(uid).ArtiType + 1;
+        var randomSprite = (int)artiType;
         _appearance.SetData(uid, SharedArtifactsVisuals.SpriteIndex, randomSprite);
         _item.SetHeldPrefix(uid, "ano" + randomSprite.ToString("D2")); //set item artifact inhands
     }

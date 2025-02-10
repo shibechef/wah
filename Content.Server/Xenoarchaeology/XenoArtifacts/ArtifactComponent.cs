@@ -5,6 +5,16 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 
 namespace Content.Server.Xenoarchaeology.XenoArtifacts;
 
+public enum ArtiOrigin : byte
+{
+    Eldritch,
+    Martian,
+    Precursor,
+    Silicon,
+    Wizard
+}
+
+
 [RegisterComponent, Access(typeof(ArtifactSystem))]
 public sealed partial class ArtifactComponent : Component
 {
@@ -33,6 +43,8 @@ public sealed partial class ArtifactComponent : Component
     [DataField("nodesMax")]
     public int NodesMax = 9;
     #endregion
+    [DataField("artiType")]
+    public ArtiOrigin ArtiType;
 
     /// <summary>
     /// Cooldown time between artifact activations (in seconds).

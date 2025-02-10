@@ -128,6 +128,7 @@ public sealed partial class ArtifactSystem : EntitySystem
     public void RandomizeArtifact(EntityUid uid, ArtifactComponent component)
     {
         var nodeAmount = _random.Next(component.NodesMin, component.NodesMax);
+        component.ArtiType = (ArtiOrigin)_random.Next(0, 5);
 
         GenerateArtifactNodeTree(uid, component.NodeTree, nodeAmount);
         var firstNode = GetRootNode(component.NodeTree);
