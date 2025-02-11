@@ -3,11 +3,20 @@
 [RegisterComponent]
 public sealed partial class RandomArtifactSpriteComponent : Component
 {
-    [DataField("minSprite")]
-    public int MinSprite = 1;
+    [DataField("eldritchSprites")]
+    public int[] EldritchSprites = [1];
 
-    [DataField("maxSprite")]
-    public int MaxSprite = 14;
+    [DataField("martianSprites")]
+    public int[] MartianSprites = [1];
+
+    [DataField("precursorSprites")]
+    public int[] PrecursorSprites = [1];
+
+    [DataField("siliconSprites")]
+    public int[] SilicionSprites = [1];
+
+    [DataField("wizardSprites")]
+    public int[] WizardSprites = [1];
 
     [DataField("activationTime")]
     public double ActivationTime = 2.0;

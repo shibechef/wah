@@ -47,7 +47,11 @@
   - type: InteractionOutline
   - type: Artifact
   - type: RandomArtifactSprite
-    maxSprite: 36
+    eldritchSprites: [ 8, 9, 10, 11, 12, 13, 14 ]
+    martianSprites: [ 15, 16, 17, 18, 19, 20, 21 ]
+    precursorSprites: [ 22, 23, 24, 25, 26, 27, 28, 29 ] #yes, there are 8 of these for some reason
+    siliconSprites: [ 1, 2, 3, 4, 5, 6, 7 ]
+    wizardSprites: [ 30, 31, 32, 33, 34, 35, 36 ]
   - type: RandomSprite
     available:
     - enum.ArtifactsVisualLayers.Effect:

@@ -30,4 +30,10 @@ public sealed partial class ArtifactTriggerPrototype : IPrototype
 
     [DataField("blacklist")]
     public EntityWhitelist? Blacklist;
+
+    /// <summary>
+    /// Artifact types that can have this trigger, leave blank for all
+    /// </summary>
+    [DataField("originWhitelist")]
+    public ArtiOrigin[] OriginWhitelist = [];
 }

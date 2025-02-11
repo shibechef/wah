@@ -5,6 +5,15 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared.Xenoarchaeology.XenoArtifacts;
 
+public enum ArtiOrigin : byte
+{
+    Eldritch,
+    Martian,
+    Precursor,
+    Silicon,
+    Wizard
+}
+
 /// <summary>
 /// This is a prototype for...
 /// </summary>
@@ -41,4 +50,10 @@ public sealed partial class ArtifactEffectPrototype : IPrototype
 
     [DataField("blacklist")]
     public EntityWhitelist? Blacklist;
+
+    /// <summary>
+    /// Artifact types that can have this effect, leave blank for all
+    /// </summary>
+    [DataField("originWhitelist")]
+    public ArtiOrigin[] OriginWhitelist = [];
 }
