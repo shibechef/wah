@@ -58,6 +58,8 @@
   id: EffectPhasing
   targetDepth: 2
   effectHint: artifact-effect-hint-phasing
+  originWhitelist:
+    - Wizard
   permanentComponents:
   - type: PhasingArtifact
 

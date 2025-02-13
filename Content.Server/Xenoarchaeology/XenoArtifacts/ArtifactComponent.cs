@@ -5,16 +5,6 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototy
 
 namespace Content.Server.Xenoarchaeology.XenoArtifacts;
 
-public enum ArtiOrigin : byte
-{
-    Eldritch,
-    Martian,
-    Precursor,
-    Silicon,
-    Wizard
-}
-
-
 [RegisterComponent, Access(typeof(ArtifactSystem))]
 public sealed partial class ArtifactComponent : Component
 {

@@ -35,5 +35,5 @@ public sealed partial class ArtifactTriggerPrototype : IPrototype
     /// Artifact types that can have this trigger, leave blank for all
     /// </summary>
     [DataField("originWhitelist")]
-    public ArtiOrigin[] OriginWhitelist = [];
+    public List<ArtiOrigin>? OriginWhitelist;
 }

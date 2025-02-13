@@ -52,11 +52,11 @@ public sealed partial class ArtifactEffectPrototype : IPrototype
     public EntityWhitelist? Blacklist;
 
     [DataField("triggerWhitelist")]
-    public ArtifactTriggerPrototype? TriggerWhitelist;
+    public List<String>? TriggerWhitelist;
 
     /// <summary>
     /// Artifact types that can have this effect, leave blank for all
     /// </summary>
     [DataField("originWhitelist")]
-    public ArtiOrigin[] OriginWhitelist = [];
+    public List<String>? OriginWhitelist;
 }

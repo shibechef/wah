@@ -621,6 +621,8 @@
   id: EffectMitosis
   targetDepth: 3
   effectHint: artifact-effect-hint-creation
+  originWhitelist:
+    - Precursor
   components:
   - type: SpawnArtifact
     maxSpawns: 1
