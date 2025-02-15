@@ -15,6 +15,7 @@ public sealed class ArtifactInteractionTriggerSystem : EntitySystem
         SubscribeLocalEvent<ArtifactInteractionTriggerComponent, PullStartedMessage>(OnPull);
         SubscribeLocalEvent<ArtifactInteractionTriggerComponent, AttackedEvent>(OnAttack);
         SubscribeLocalEvent<ArtifactInteractionTriggerComponent, InteractHandEvent>(OnInteract);
+        SubscribeLocalEvent<ArtifactInteractionTriggerComponent, InteractUsingEvent>(OnInteractUsing);
     }
 
     private void OnPull(EntityUid uid, ArtifactInteractionTriggerComponent component, PullStartedMessage args)
@@ -42,5 +43,10 @@ public sealed class ArtifactInteractionTriggerSystem : EntitySystem
             return;
 
         args.Handled = _artifactSystem.TryActivateArtifact(uid, args.User);
+    }
+
+    private void OnInteractUsing()
+    {
+
     }
 }

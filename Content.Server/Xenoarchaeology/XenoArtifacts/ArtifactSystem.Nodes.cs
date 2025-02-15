@@ -247,7 +247,7 @@ public sealed partial class ArtifactSystem
 
     private bool IsTriggerValid(ArtifactComponent artifact, ArtifactTriggerPrototype artiTrigger)
     {
-        if (artiTrigger.OriginWhitelist != null && !artiTrigger.OriginWhitelist.Contains(artifact.ArtiType))
+        if (artiTrigger.OriginWhitelist != null && !artiTrigger.OriginWhitelist.Contains(artifact.ArtiType.ToString()))
             return false;
         return true;
     }
@@ -255,8 +255,8 @@ public sealed partial class ArtifactSystem
     private bool IsEffectValid(ArtifactComponent artifact, string artifactTrigger, ArtifactEffectPrototype artiEffect)
     {
         Log.Debug($"before {artifact.ArtiType}, wow {artiEffect.OriginWhitelist}");
-        //if (artiEffect.OriginWhitelist != null && !artiEffect.OriginWhitelist.Contains(artifact.ArtiType))
-        //    return false;
+        if (artiEffect.OriginWhitelist != null && !artiEffect.OriginWhitelist.Contains(artifact.ArtiType.ToString()))
+            return false;
         if (artiEffect.TriggerWhitelist != null && !artiEffect.TriggerWhitelist.Contains(artifactTrigger))
             return false;
         Log.Debug($"aftere {artifact.ArtiType}, wow {artiEffect.OriginWhitelist}");
