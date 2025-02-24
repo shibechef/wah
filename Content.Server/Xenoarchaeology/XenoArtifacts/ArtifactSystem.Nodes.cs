@@ -254,12 +254,10 @@ public sealed partial class ArtifactSystem
 
     private bool IsEffectValid(ArtifactComponent artifact, string artifactTrigger, ArtifactEffectPrototype artiEffect)
     {
-        Log.Debug($"before {artifact.ArtiType}, wow {artiEffect.OriginWhitelist}");
         if (artiEffect.OriginWhitelist != null && !artiEffect.OriginWhitelist.Contains(artifact.ArtiType.ToString()))
             return false;
         if (artiEffect.TriggerWhitelist != null && !artiEffect.TriggerWhitelist.Contains(artifactTrigger))
             return false;
-        Log.Debug($"aftere {artifact.ArtiType}, wow {artiEffect.OriginWhitelist}");
         return true;
     }
 }

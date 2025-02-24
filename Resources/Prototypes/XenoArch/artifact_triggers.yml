@@ -90,6 +90,20 @@
   - type: ArtifactHeatTrigger
 
 - type: artifactTrigger
+  id: SiliconTouch
+  targetDepth: 1
+  triggerHint: artifact-trigger-hint-heat
+  components:
+  - type: ArtifactItemTrigger
+    whitelist:
+      tags:
+      - BorgArm
+  - type: ArtifactInteractionTrigger
+    entityWhitelist:
+      components:
+      - IonStormTarget
+
+- type: artifactTrigger
   id: TriggerWater
   targetDepth: 1
   triggerHint: artifact-trigger-hint-water
@@ -183,6 +197,17 @@
     - Radiation
     damageThreshold: 50
   - type: RadiationReceiver
+  - type: ArtifactGasTrigger
+    possibleGas:
+    - Tritium
+  - type: Reactive
+    groups:
+      Acidic: [ Touch ]
+    reactions:
+    - reagents: [ Radium, Uranium, Phalanximine, UnstableMutagen ]
+      methods: [ Touch ]
+      effects:
+      - !type:ActivateArtifact
 
 - type: artifactTrigger
   id: TriggerHighPressure

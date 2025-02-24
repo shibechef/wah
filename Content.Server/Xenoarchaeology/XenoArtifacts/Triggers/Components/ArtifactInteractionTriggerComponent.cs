@@ -1,4 +1,5 @@
 namespace Content.Server.Xenoarchaeology.XenoArtifacts.Triggers.Components;
+using Content.Shared.Whitelist;
 
 /// <summary>
 ///     Activate artifact by touching, attacking or pulling it.
@@ -26,4 +27,10 @@ public sealed partial class ArtifactInteractionTriggerComponent : Component
     [DataField("pullActivation")]
     [ViewVariables(VVAccess.ReadWrite)]
     public bool PullActivation = true;
+
+    /// <summary>
+    ///     What entities should be able to cause this reaction
+    /// </summary>
+    [DataField("entityWhitelist")]
+    public EntityWhitelist? EntityWhitelist;
 }

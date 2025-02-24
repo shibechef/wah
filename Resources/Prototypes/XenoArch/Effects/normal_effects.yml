@@ -104,8 +104,22 @@
   - type: LightFlickerArtifact
 
 - type: artifactEffect
-  id: EffectPointLight
+  id: EffectWizardLight
+  targetDepth: 1
+  originWhitelist:
+    - Wizard
+  components:
+  - type: RgbLightController
+    cycleRate: 0.2
+  - type: PointLight
+    radius: 8
+    energy: 10
+
+- type: artifactEffect
+  id: EffectMartianLight
   targetDepth: 0
+  originWhitelist:
+    - Martian
   components:
   - type: PointLight
     radius: 8
@@ -113,7 +127,27 @@
     color: "#daa3fd"
   - type: TriggerArtifact
   - type: FlashOnTrigger
-    range: 8
+    range: 10
+
+  - type: artifactEffect
+  id: EffectSiliconLight
+  targetDepth: 0
+  originWhitelist:
+    - Silicon
+  components:
+  - type: PointLight
+    radius: 8
+    energy: 10
+    color: "3bc7eb"
+  - type: TriggerArtifact
+  - type: FlashOnTrigger
+    range: 6
+
+#- type: artifactEffect
+#  id: SurroundingDarkness
+#  targetDepth: 3
+#  originWhitelist:
+#    - Eldritch
 
 - type: artifactEffect #bornana
   id: EffectBananaSpawn
