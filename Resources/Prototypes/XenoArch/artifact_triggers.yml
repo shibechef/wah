@@ -93,6 +93,8 @@
   id: SiliconTouch
   targetDepth: 1
   triggerHint: artifact-trigger-hint-heat
+  originWhitelist:
+    - Silicon
   components:
   - type: ArtifactItemTrigger
     whitelist:
@@ -116,6 +118,9 @@
       methods: [ Touch ]
       effects:
       - !type:ActivateArtifact
+  - type: ArtifactGasTrigger
+    possibleGas:
+    - Plasma
 
 - type: artifactTrigger
   id: TriggerBlood
@@ -140,7 +145,7 @@
     groups:
       Acidic: [ Touch ]
     reactions:
-    - reagents: [ Dylovene, Diphenhydramine, Arithrazine, Bicaridine, Dermaline, Dexalin, DexalinPlus, Tricordrazine, Leporazine, Bruizine, Lacerinol, Puncturase, Pyrazine, Insuzine, Kelotane, Hyronalin, Inaprovaline, Epinephrine ]
+    - reagents: [ Dylovene, Diphenhydramine, Arithrazine, Bicaridine, Dermaline, Dexalin, DexalinPlus, Tricordrazine, Leporazine, Bruizine, Lacerinol, Puncturase, Pyrazine, Insuzine, Kelotane, Hyronalin, Inaprovaline, Epinephrine, Omnizine ]
       methods: [ Touch ]
       effects:
       - !type:ActivateArtifact
