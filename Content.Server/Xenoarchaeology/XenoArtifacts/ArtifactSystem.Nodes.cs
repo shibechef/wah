@@ -1,8 +1,11 @@
+using System;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using Content.Server.Xenoarchaeology.XenoArtifacts.Events;
 using Content.Shared.Whitelist;
 using Content.Shared.Xenoarchaeology.XenoArtifacts;
 using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Robust.Shared.Random;
 
 namespace Content.Server.Xenoarchaeology.XenoArtifacts;
@@ -85,72 +88,77 @@ public sealed partial class ArtifactSystem
             .Where(x => _whitelistSystem.IsWhitelistPassOrNull(x.Whitelist, artifact) &&
             _whitelistSystem.IsBlacklistFailOrNull(x.Blacklist, artifact) &&
             IsTriggerValid(EntityManager.GetComponent<ArtifactComponent>(artifact), x)).ToList();
-        var validDepth = allTriggers.Select(x => x.TargetDepth).Distinct().ToList();
 
-        var weights = GetDepthWeights(validDepth, node.Depth);
-        var selectedRandomTargetDepth = GetRandomTargetDepth(weights);
-        var targetTriggers = allTriggers
-            .Where(x => x.TargetDepth == selectedRandomTargetDepth).ToList();
+        //get the sum of weights
+        var sum = 0.0f;
+        foreach (var trigger in allTriggers)
+        {
+            sum += GetTriggerWeight(trigger, node.Depth);
+        }
 
-        return _random.Pick(targetTriggers).ID;
+        //get random from a weight
+        var random = _random.NextFloat(0.0f, sum);
+        foreach (var trigger in allTriggers)
+        {
+            random -= GetTriggerWeight(trigger, node.Depth);
+            if (random < 0.0f)
+                return trigger.ID;
+        }
+
+        //failsafe
+        return _random.Pick(allTriggers).ID;
     }
 
     private string GetRandomEffect(EntityUid artifact, ref ArtifactNode node)
     {
-        var trigger = node.Trigger;
+        var trigger = _prototype.Index<ArtifactTriggerPrototype>(node.Trigger);
         var allEffects = _prototype.EnumeratePrototypes<ArtifactEffectPrototype>()
             .Where(x => _whitelistSystem.IsWhitelistPassOrNull(x.Whitelist, artifact) &&
             _whitelistSystem.IsBlacklistFailOrNull(x.Blacklist, artifact) &&
             IsEffectValid(EntityManager.GetComponent<ArtifactComponent>(artifact), trigger, x)).ToList();
-        var validDepth = allEffects.Select(x => x.TargetDepth).Distinct().ToList();
 
-        var weights = GetDepthWeights(validDepth, node.Depth);
-        var selectedRandomTargetDepth = GetRandomTargetDepth(weights);
-        var targetEffects = allEffects
-            .Where(x => x.TargetDepth == selectedRandomTargetDepth).ToList();
-
-        return _random.Pick(targetEffects).ID;
-    }
-
-    /// <remarks>
-    /// The goal is that the depth that is closest to targetDepth has the highest chance of appearing.
-    /// The issue is that we also want some variance, so levels that are +/- 1 should also have a
-    /// decent shot of appearing. This function should probably get some tweaking at some point.
-    /// </remarks>
-    private Dictionary<int, float> GetDepthWeights(IEnumerable<int> depths, int targetDepth)
-    {
-        // this function is just a normal distribution with a
-        // mean of target depth and standard deviation of 0.75
-        var weights = new Dictionary<int, float>();
-        foreach (var d in depths)
+        //get the sum of weights
+        var sum = 0.0f;
+        foreach (var effect in allEffects)
         {
-            var w = 10f / (0.75f * MathF.Sqrt(2 * MathF.PI)) * MathF.Pow(MathF.E, -MathF.Pow((d - targetDepth) / 0.75f, 2));
-            weights.Add(d, w);
+            sum += GetEffectWeight(effect, node.Depth);
         }
-        return weights;
+
+        //get random from a weight
+        var random = _random.NextFloat(0.0f, sum);
+        foreach (var effect in allEffects)
+        {
+            random -= GetEffectWeight(effect, node.Depth);
+            if (random < 0.0f)
+                return effect.ID;
+        }
+
+        //failsafe
+        return _random.Pick(allEffects).ID;
+
     }
 
-    /// <summary>
-    /// Uses a weighted random system to get a random depth.
-    /// </summary>
-    private int GetRandomTargetDepth(Dictionary<int, float> weights)
+    //gets the weight of a trigger at a depth
+    //It is 100% of the weight at the target depth, and decreases to 0% of the weight at the edge
+    private float GetTriggerWeight(ArtifactTriggerPrototype trigger, int depth)
     {
-        var sum = weights.Values.Sum();
-        var accumulated = 0f;
+        return trigger.Weight * (1.0f - MathF.Abs(depth - trigger.TargetDepth) / (trigger.DepthRange + 1.0f));
+    }
 
-        var rand = _random.NextFloat() * sum;
-
-        foreach (var (key, weight) in weights)
+    //gets the weight of a trigger at a depth
+    //It is 100% of the weight at the target depth, and decreases to 0% of the weight at the edge
+    //The weight also takes into account how likely the trigger precondition is to occur
+    private float GetEffectWeight(ArtifactEffectPrototype effect, int depth)
+    {
+        var preconditionWeight = 1.0f;
+        if (effect.TriggerWhitelist != null)
         {
-            accumulated += weight;
-
-            if (accumulated >= rand)
+            foreach (var trigger in effect.TriggerWhitelist)
             {
-                return key;
+                preconditionWeight += _prototype.Index<ArtifactTriggerPrototype>(trigger).Weight;
             }
         }
-
-        return _random.Pick(weights.Keys); //shouldn't happen
+        return effect.Weight * (1.0f - MathF.Abs(depth - effect.TargetDepth) / (effect.DepthRange + 1.0f)) / preconditionWeight;
     }
 
     /// <summary>
@@ -252,7 +260,7 @@ public sealed partial class ArtifactSystem
         return true;
     }
 
-    private bool IsEffectValid(ArtifactComponent artifact, string artifactTrigger, ArtifactEffectPrototype artiEffect)
+    private bool IsEffectValid(ArtifactComponent artifact, ArtifactTriggerPrototype artifactTrigger, ArtifactEffectPrototype artiEffect)
     {
         if (artiEffect.OriginWhitelist != null && !artiEffect.OriginWhitelist.Contains(artifact.ArtiType.ToString()))
             return false;

@@ -19,8 +19,23 @@ public sealed partial class ArtifactTriggerPrototype : IPrototype
     [DataField("components", serverOnly: true)]
     public ComponentRegistry Components = new();
 
+    /// <summary>
+    /// The most likely depth this trigger will occur at
+    /// </summary>
     [DataField("targetDepth")]
-    public int TargetDepth = 0;
+    public float TargetDepth = 0.0f;
+
+    /// <summary>
+    /// How many depths above or below the target can the trigger occur; The chance decreases linearly to 0 at the min/max depth
+    /// </summary>
+    [DataField("depthRange")]
+    public float DepthRange = 1.0f;
+
+    /// <summary>
+    /// How likely is the trigger to occur at the range it can occur
+    /// </summary>
+    [DataField("weight")]
+    public float Weight = 1.0f;
 
     [DataField("triggerHint")]
     public string? TriggerHint;

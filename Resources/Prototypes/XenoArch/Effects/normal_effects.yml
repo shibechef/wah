@@ -153,6 +153,8 @@
   id: EffectBananaSpawn
   targetDepth: 0
   effectHint: artifact-effect-hint-creation
+  originWhitelist:
+    - Precursor
   components:
   - type: SpawnArtifact
     maxSpawns: 20

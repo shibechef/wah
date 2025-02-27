@@ -2,6 +2,7 @@
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Xenoarchaeology.XenoArtifacts;
 
@@ -38,9 +39,23 @@ public sealed partial class ArtifactEffectPrototype : IPrototype
     [DataField("permanentComponents")]
     public ComponentRegistry PermanentComponents = new();
 
-    //TODO: make this a list so we can have multiple target depths
+    /// <summary>
+    /// The most likely depth this effect will occur at
+    /// </summary>
     [DataField("targetDepth")]
-    public int TargetDepth = 0;
+    public float TargetDepth = 0.0f;
+
+    /// <summary>
+    /// How many depths above or below the target can the effect occur; The chance decreases linearly to 0 at the min/max depth
+    /// </summary>
+    [DataField("depthRange")]
+    public float DepthRange = 1.0f;
+
+    /// <summary>
+    /// How likely is the effect to occur at the range it can occur; It takes the weight of the trigger preconditions into account already
+    /// </summary>
+    [DataField("weight")]
+    public float Weight = 1.0f;
 
     [DataField("effectHint")]
     public string? EffectHint;
@@ -51,8 +66,8 @@ public sealed partial class ArtifactEffectPrototype : IPrototype
     [DataField("blacklist")]
     public EntityWhitelist? Blacklist;
 
-    [DataField("triggerWhitelist")]
-    public List<String>? TriggerWhitelist;
+    [DataField("triggerWhitelist", customTypeSerializer: typeof(PrototypeIdSerializer<ArtifactTriggerPrototype>))]
+    public List<ArtifactTriggerPrototype>? TriggerWhitelist;
 
     /// <summary>
     /// Artifact types that can have this effect, leave blank for all
