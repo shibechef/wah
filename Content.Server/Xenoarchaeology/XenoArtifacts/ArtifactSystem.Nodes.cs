@@ -147,18 +147,9 @@ public sealed partial class ArtifactSystem
 
     //gets the weight of a trigger at a depth
     //It is 100% of the weight at the target depth, and decreases to 0% of the weight at the edge
-    //The weight also takes into account how likely the trigger precondition is to occur
     private float GetEffectWeight(ArtifactEffectPrototype effect, int depth)
     {
-        var preconditionWeight = 1.0f;
-        if (effect.TriggerWhitelist != null)
-        {
-            foreach (var trigger in effect.TriggerWhitelist)
-            {
-                preconditionWeight += _prototype.Index<ArtifactTriggerPrototype>(trigger).Weight;
-            }
-        }
-        return effect.Weight * (1.0f - MathF.Abs(depth - effect.TargetDepth) / (effect.DepthRange + 1.0f)) / preconditionWeight;
+        return effect.Weight * (1.0f - MathF.Abs(depth - effect.TargetDepth) / (effect.DepthRange + 1.0f));
     }
 
     /// <summary>

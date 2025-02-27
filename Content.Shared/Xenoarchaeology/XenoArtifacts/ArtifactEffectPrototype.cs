@@ -1,7 +1,9 @@
 ﻿using Content.Shared.Item;
 using Content.Shared.Whitelist;
+using Content.Shared.Xenoarchaeology.XenoArtifacts;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Xenoarchaeology.XenoArtifacts;
@@ -52,7 +54,7 @@ public sealed partial class ArtifactEffectPrototype : IPrototype
     public float DepthRange = 1.0f;
 
     /// <summary>
-    /// How likely is the effect to occur at the range it can occur; It takes the weight of the trigger preconditions into account already
+    /// How likely is the effect to occur at the range it can occur; It does not take into account how likely preconditions are to occur, like needing a certain trigger
     /// </summary>
     [DataField("weight")]
     public float Weight = 1.0f;
@@ -65,8 +67,11 @@ public sealed partial class ArtifactEffectPrototype : IPrototype
 
     [DataField("blacklist")]
     public EntityWhitelist? Blacklist;
+    /// <summary>
+    /// Restricts what triggers can cause this effect
+    /// </summary>
 
-    [DataField("triggerWhitelist", customTypeSerializer: typeof(PrototypeIdSerializer<ArtifactTriggerPrototype>))]
+    [DataField("triggerWhitelist")]
     public List<ArtifactTriggerPrototype>? TriggerWhitelist;
 
     /// <summary>

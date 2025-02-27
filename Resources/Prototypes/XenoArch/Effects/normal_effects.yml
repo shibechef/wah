@@ -117,7 +117,9 @@
 
 - type: artifactEffect
   id: EffectMartianLight #basically blinding purple
-  targetDepth: 0
+  targetDepth: 1
+  depthRange: 3
+  weight: .5
   originWhitelist:
     - Martian
   components:
@@ -131,9 +133,13 @@
 
 - type: artifactEffect
   id: EffectSiliconLight #normal room lighting
-  targetDepth: 0
+  targetDepth: 1
+  depthRange: 3
+  weight: 500
   originWhitelist:
     - Silicon
+  triggerWhitelist:
+    - SiliconTouch
   components:
   - type: PointLight
     radius: 10
@@ -182,6 +188,7 @@
 - type: artifactEffect
   id: EffectThrow
   targetDepth: 0
+  depthRange: 2
   effectHint: artifact-effect-hint-environment
   components:
     - type: ThrowArtifact
@@ -189,6 +196,7 @@
 - type: artifactEffect
   id: EffectChemicalPuddle
   targetDepth: 0
+  depthRange: 2
   effectHint: artifact-effect-hint-biochemical
   components:
   - type: ChemicalPuddleArtifact
@@ -237,6 +245,7 @@
 - type: artifactEffect
   id: EffectFoamMild
   targetDepth: 1
+  depthRange: 3
   effectHint: artifact-effect-hint-biochemical
   components:
   - type: FoamArtifact
@@ -280,6 +289,8 @@
 - type: artifactEffect
   id: EffectChargeBatteries
   targetDepth: 1
+  depthRange: 2
+  weight: .2
   effectHint: artifact-effect-hint-release
   components:
   - type: ChargeBatteryArtifact
@@ -290,6 +301,7 @@
 - type: artifactEffect
   id: EffectRadiate
   targetDepth: 1
+  depthRange: 3
   effectHint: artifact-effect-hint-release
   components:
   - type: RadiationSource
@@ -306,6 +318,7 @@
 - type: artifactEffect
   id: EffectMagnet
   targetDepth: 1
+  depthRange: 2
   effectHint: artifact-effect-hint-magnet
   components:
   - type: GravityWell
@@ -316,6 +329,7 @@
 - type: artifactEffect
   id: EffectAntiMagnet
   targetDepth: 1
+  depthRange: 2
   effectHint: artifact-effect-hint-magnet
   components:
   - type: GravityWell
@@ -326,6 +340,8 @@
 - type: artifactEffect
   id: EffectInvisibility
   targetDepth: 2
+  depthRange: 3
+  weight: .5
   effectHint: artifact-effect-hint-visual
   components:
   - type: Stealth
@@ -337,6 +353,8 @@
 - type: artifactEffect
   id: EffectExplosionScary
   targetDepth: 2
+  depthRange: 3
+  weight: .5
   effectHint: artifact-effect-hint-environment
   components:
   - type: TriggerArtifact
@@ -384,7 +402,9 @@
 
 - type: artifactEffect
   id: EffectFaunaSpawn
-  targetDepth: 2
+  targetDepth: 1
+  depthRange: 3
+  weight: .5
   effectHint: artifact-effect-hint-creation
   components:
   - type: SpawnArtifact
@@ -468,6 +488,8 @@
 - type: artifactEffect
   id: EffectShatterWindows
   targetDepth: 2
+  depthRange: 2
+  weight: .5
   effectHint: artifact-effect-hint-environment
   components:
   - type: DamageNearbyArtifact
@@ -496,6 +518,8 @@
 - type: artifactEffect
   id: EffectBlink
   targetDepth: 2
+  depthRange: 2
+  weight: .3
   effectHint: artifact-effect-hint-displacement
   components:
   - type: RandomTeleportArtifact
@@ -503,6 +527,7 @@
 - type: artifactEffect
   id: EffectFoamGood
   targetDepth: 2
+  depthRange: 2
   effectHint: artifact-effect-hint-biochemical
   components:
   - type: FoamArtifact
@@ -518,6 +543,8 @@
 - type: artifactEffect
   id: EffectChemicalPuddleRare
   targetDepth: 2
+  depthRange: 2
+  weight: .2
   effectHint: artifact-effect-hint-biochemical
   components:
   - type: ChemicalPuddleArtifact
@@ -544,6 +571,8 @@
 - type: artifactEffect
   id: EffectEmp
   targetDepth: 2
+  depthRange: 3
+  weight: .2
   effectHint: artifact-effect-hint-electrical-interference
   components:
   - type: EmpArtifact
@@ -551,6 +580,8 @@
 - type: artifactEffect
   id: EffectPolyMonkey
   targetDepth: 2
+  depthRange: 2
+  weight: .4
   effectHint: artifact-effect-hint-polymorph
   components:
   - type: PolyOthersArtifact
@@ -558,6 +589,8 @@
 - type: artifactEffect
   id: EffectPolyLizard
   targetDepth: 2
+  depthRange: 2
+  weight: .4
   effectHint: artifact-effect-hint-polymorph
   components:
   - type: PolyOthersArtifact
@@ -566,6 +599,8 @@
 - type: artifactEffect
   id: EffectPolyLuminous
   targetDepth: 3
+  depthRange: 2
+  weight: .4
   effectHint: artifact-effect-hint-polymorph
   components:
   - type: PolyOthersArtifact
@@ -573,7 +608,9 @@
 
 - type: artifactEffect
   id: EffectHealAll
-  targetDepth: 3
+  targetDepth: 5
+  depthRange: 3
+  weight: .5
   effectHint: artifact-effect-hint-environment
   components:
   - type: DamageNearbyArtifact
@@ -589,7 +626,9 @@
 
 - type: artifactEffect
   id: EffectRadiateStrong
-  targetDepth: 3
+  targetDepth: 4
+  depthRange: 2
+  weight: .5
   effectHint: artifact-effect-hint-release
   components:
   - type: RadiationSource
@@ -599,6 +638,8 @@
 - type: artifactEffect
   id: EffectMaterialSpawn
   targetDepth: 3
+  depthRange: 3
+  weight: .3
   effectHint: artifact-effect-hint-creation
   components:
   - type: SpawnArtifact
@@ -624,7 +665,8 @@
 
 - type: artifactEffect
   id: EffectFoamDangerous
-  targetDepth: 3
+  targetDepth: 5
+  depthRange: 3
   effectHint: artifact-effect-hint-biochemical
   components:
   - type: FoamArtifact
@@ -645,7 +687,9 @@
 
 - type: artifactEffect
   id: EffectIgnite
-  targetDepth: 3
+  targetDepth: 4
+  depthRange: 2
+  weight: .3
   effectHint: artifact-effect-hint-release
   components:
   - type: IgniteArtifact
@@ -655,7 +699,9 @@
 
 - type: artifactEffect
   id: EffectMitosis
-  targetDepth: 3
+  targetDepth: 5
+  depthRange: 3
+  weight: .1
   effectHint: artifact-effect-hint-creation
   originWhitelist:
     - Precursor
@@ -667,7 +713,9 @@
 
 - type: artifactEffect
   id: EffectAnomaly
-  targetDepth: 3
+  targetDepth: 5
+  depthRange: 3
+  weight: .1
   effectHint: artifact-effect-hint-creation
   components:
   - type: SpawnArtifact
@@ -678,6 +726,8 @@
 - type: artifactEffect
   id: EffectBoom
   targetDepth: 3
+  depthRange: 2
+  weight: .5
   effectHint: artifact-effect-hint-environment
   components:
   - type: TriggerArtifact
@@ -692,13 +742,17 @@
 - type: artifactEffect
   id: EffectPortal
   targetDepth: 3
+  depthRange: 2
+  weight: .5
   effectHint: artifact-effect-hint-displacement
   components:
   - type: PortalArtifact
 
 - type: artifactEffect
   id: EffectSingulo
-  targetDepth: 10
+  targetDepth: 15
+  depthRange: 5
+  weight: .1
   effectHint: artifact-effect-hint-destruction
   components:
   - type: SpawnArtifact
@@ -708,7 +762,9 @@
 
 - type: artifactEffect
   id: EffectTesla
-  targetDepth: 10
+  targetDepth: 15
+  depthRange: 5
+  weight: .1
   effectHint: artifact-effect-hint-destruction
   components:
   - type: SpawnArtifact

@@ -32,7 +32,7 @@ public sealed partial class ArtifactTriggerPrototype : IPrototype
     public float DepthRange = 1.0f;
 
     /// <summary>
-    /// How likely is the trigger to occur at the range it can occur
+    /// How likely is the trigger to occur at the range it can occur. It does not take into account how likely preconditions are to occur, like needing a certain origin
     /// </summary>
     [DataField("weight")]
     public float Weight = 1.0f;

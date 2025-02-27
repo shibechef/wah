@@ -3,6 +3,8 @@
 - type: artifactEffect
   id: EffectIntercom
   targetDepth: 2
+  depthRange: 2
+  weight: .2
   effectHint: artifact-effect-hint-communication
   permanentComponents:
   - type: RadioMicrophone
@@ -30,6 +32,8 @@
 - type: artifactEffect
   id: EffectRandomInstrument
   targetDepth: 2
+  depthRange: 2
+  weight: .5
   effectHint: artifact-effect-hint-mental
   permanentComponents:
   - type: Instrument
@@ -42,6 +46,8 @@
 - type: artifactEffect
   id: EffectStorage
   targetDepth: 2
+  depthRange: 2
+  weight: .3
   effectHint: artifact-effect-hint-storage
   whitelist:
     components:
@@ -56,6 +62,8 @@
 
 - type: artifactEffect
   id: EffectPhasing
+  depthRange: 2
+  weight: .5
   targetDepth: 2
   effectHint: artifact-effect-hint-phasing
   originWhitelist:
@@ -66,6 +74,8 @@
 - type: artifactEffect
   id: EffectWandering
   targetDepth: 2
+  depthRange: 2
+  weight: .5
   effectHint: artifact-effect-hint-displacement
   blacklist:
     components:
@@ -80,6 +90,7 @@
 - type: artifactEffect
   id: EffectSolutionStorage
   targetDepth: 2
+  weight: .5
   effectHint: artifact-effect-hint-storage
   whitelist:
     components:
@@ -108,7 +119,9 @@
 
 - type: artifactEffect
   id: EffectSpeedUp
-  targetDepth: 2
+  targetDepth: 4
+  depthRange: 2
+  weight: .2
   effectHint: artifact-effect-hint-displacement
   whitelist:
     components:
@@ -120,7 +133,9 @@
 
 - type: artifactEffect #slower than a pick but better structural per second; half the structural as a diamond drill
   id: EffectDemolisher
-  targetDepth: 3
+  targetDepth: 4
+  depthRange: 2
+  weight: .2
   effectHint: artifact-effect-hint-drill
   whitelist:
     components:
@@ -141,7 +156,9 @@
 
 - type: artifactEffect #worse than a fire axe
   id: EffectScythe
-  targetDepth: 3
+  targetDepth: 4
+  depthRange: 2
+  weight: .2
   effectHint: artifact-effect-hint-drill
   originWhitelist:
     - Precursor
@@ -208,7 +225,9 @@
 
 - type: artifactEffect
   id: EffectSentience
-  targetDepth: 3
+  targetDepth: 4
+  depthRange: 2
+  weight: .2
   effectHint: artifact-effect-hint-sentience
   permanentComponents:
   - type: GhostRole
@@ -230,6 +249,8 @@
 - type: artifactEffect
   id: EffectMultitool
   targetDepth: 3
+  depthRange: 2
+  weight: .2
   effectHint: artifact-effect-hint-multitool
   whitelist:
     components:
