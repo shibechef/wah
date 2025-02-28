@@ -33,8 +33,9 @@ public sealed partial class ArtifactComponent : Component
     [DataField("nodesMax")]
     public int NodesMax = 9;
     #endregion
+
     [DataField("artiType")]
-    public ArtiOrigin ArtiType;
+    public ArtiOrigin ArtiType = ArtiOrigin.Undecided;
 
     /// <summary>
     /// Cooldown time between artifact activations (in seconds).

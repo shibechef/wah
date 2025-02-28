@@ -14,7 +14,8 @@ public enum ArtiOrigin : byte
     Martian,
     Precursor,
     Silicon,
-    Wizard
+    Wizard,
+    Undecided
 }
 
 /// <summary>
