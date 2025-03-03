@@ -8,6 +8,8 @@
 - type: artifactTrigger
   id: TriggerTimer
   targetDepth: 0
+  depthRange: 2
+  weight: .1
   components:
   - type: ArtifactTimerTrigger
 
@@ -32,7 +34,7 @@
 - type: artifactTrigger
   id: TriggerElectricity
   targetDepth: 0
-  depthRange: 3
+  depthRange: 2
   triggerHint: artifact-trigger-hint-electricity
   blacklist:
     components:
@@ -58,7 +60,7 @@
 - type: artifactTrigger
   id: TriggerMusic
   targetDepth: 0
-  depthRange: 5
+  depthRange: 3
   triggerHint: artifact-trigger-hint-music
   components:
   - type: ArtifactMusicTrigger
@@ -78,7 +80,6 @@
 
 - type: artifactTrigger
   id: TriggerItemLanded
-  targetDepth: 1
   depthRange: 100
   triggerHint: artifact-trigger-hint-land
   whitelist:
@@ -94,19 +95,41 @@
   components:
   - type: ArtifactHeatTrigger
 
+- type: artifactTrigger #has dangerous effects bound to only it, and generally more dangerous to be in touching range to an arti...
+  id: TriggerTouch
+  depthRange: 100
+  weight: 500
+  originWhitelist:
+    - Wizard
+    - Eldritch
+    - Martian
+    - Precursor
+  blacklist:
+    components:
+    - Item
+  components:
+  - type: ArtifactInteractionTrigger
+    attackActivation: false
+    pullActivation: false
+
 - type: artifactTrigger
-  id: SiliconTouch
-  targetDepth: 1
+  id: TriggerSiliconTouch
   depthRange: 100
   triggerHint: artifact-trigger-hint-heat
   originWhitelist:
     - Silicon
+  blacklist:
+    components:
+    - Item
   components:
   - type: ArtifactItemTrigger
     whitelist:
       tags:
       - BorgArm
+      - BorgLeg
   - type: ArtifactInteractionTrigger
+    attackActivation: false
+    pullActivation: false
     entityWhitelist:
       components:
       - IonStormTarget
@@ -131,8 +154,10 @@
 - type: artifactTrigger
   id: TriggerBlood
   targetDepth: 1
-  depthRange: 4
+  depthRange: 3
   triggerHint: artifact-trigger-hint-blood
+  originWhitelist:
+    - Eldritch
   components:
   - type: Reactive
     groups:
@@ -153,7 +178,75 @@
     groups:
       Acidic: [ Touch ]
     reactions:
-    - reagents: [ Dylovene, Diphenhydramine, Arithrazine, Bicaridine, Dermaline, Dexalin, DexalinPlus, Tricordrazine, Leporazine, Bruizine, Lacerinol, Puncturase, Pyrazine, Insuzine, Kelotane, Hyronalin, Inaprovaline, Epinephrine, Omnizine ]
+    - reagents: [ Dylovene, Diphenhydramine, Arithrazine, Bicaridine, Dermaline, Dexalin, DexalinPlus, Tricordrazine, Leporazine, Bruizine, Lacerinol, Puncturase, Pyrazine, Insuzine, Kelotane, Hyronalin, Inaprovaline, Epinephrine, Omnizine, Barozine, Saline, Holywater ]
+      methods: [ Touch ]
+      effects:
+      - !type:ActivateArtifact
+
+- type: artifactTrigger
+  id: TriggerPyrotechnic
+  targetDepth: 4
+  weight: .5
+  triggerHint: artifact-trigger-hint-blood
+  originWhitelist:
+    - Wizard
+  components:
+  - type: Reactive
+    groups:
+      Acidic: [ Touch ]
+    reactions:
+    - reagents: [ Thermite, Napalm, Phlogiston, ChlorineTrifluoride, FoamingAgent, Fluorosurfactant ]
+      methods: [ Touch ]
+      effects:
+      - !type:ActivateArtifact
+
+- type: artifactTrigger
+  id: TriggerElemental
+  targetDepth: 2
+  depthRange: 2
+  triggerHint: artifact-trigger-hint-blood
+  originWhitelist:
+    - Precursor
+  components:
+  - type: Reactive
+    groups:
+      Acidic: [ Touch ]
+    reactions:
+    - reagents: [ Aluminium, Carbon, Chlorine, Copper, Fluorine, Gold, Hydrogen, Iodine, Iron, Lithium, Mercury, Potassium, Phosphorus, Radium, Silicon, Silver, Sulfur, Sodium, Uranium, Zinc, Lead ]
+      methods: [ Touch ]
+      effects:
+      - !type:ActivateArtifact
+
+- type: artifactTrigger
+  id: TriggerAcidic
+  targetDepth: 4
+  weight: .5
+  triggerHint: artifact-trigger-hint-blood
+  originWhitelist:
+    - Martian
+  components:
+  - type: Reactive
+    groups:
+      Acidic: [ Touch ]
+    reactions:
+    - reagents: [ PolytrinicAcid, FerrochromicAcid, FluorosulfuricAcid, SulfuricAcid, NorepinephricAcid, AcidSpit, TranexamicAcid ]
+      methods: [ Touch ]
+      effects:
+      - !type:ActivateArtifact
+
+- type: artifactTrigger
+  id: TriggerToxin
+  targetDepth: 3
+  weight: .3
+  triggerHint: artifact-trigger-hint-blood
+  originWhitelist:
+    - Martian
+  components:
+  - type: Reactive
+    groups:
+      Acidic: [ Touch ]
+    reactions:
+    - reagents: [ Toxin, CarpoToxin, ChloralHydrate, GastroToxin, Mold, HeartbreakerToxin, Lexorin, Histamine, Amatoxin, VentCrud, Romerol, Bungotoxin, Vestine, Lipolicide, Mechanotoxin, Ipecac ]
       methods: [ Touch ]
       effects:
       - !type:ActivateArtifact
@@ -161,7 +254,7 @@
 - type: artifactTrigger
   id: TriggerGas
   targetDepth: 2
-  depthRange: 4
+  depthRange: 3
   triggerHint: artifact-trigger-hint-regular-gases
   components:
   - type: ArtifactGasTrigger

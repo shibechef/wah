@@ -106,6 +106,7 @@
 - type: artifactEffect
   id: EffectWizardLight #nice and slow RGB that covers a room
   targetDepth: 1
+  weight: .5
   originWhitelist:
     - Wizard
   components:
@@ -118,7 +119,6 @@
 - type: artifactEffect
   id: EffectMartianLight #basically blinding purple
   targetDepth: 1
-  depthRange: 3
   weight: .5
   originWhitelist:
     - Martian
@@ -134,8 +134,7 @@
 - type: artifactEffect
   id: EffectSiliconLight #normal room lighting
   targetDepth: 1
-  depthRange: 3
-  weight: 500
+  weight: .5
   originWhitelist:
     - Silicon
   triggerWhitelist:
@@ -261,6 +260,7 @@
     - VentCrud
     - WeldingFuel
     - JuiceThatMakesYouWeh
+    - Carpetium
 
 - type: artifactEffect
   id: EffectInstrumentSpawn
@@ -569,6 +569,67 @@
     - Siderlac
 
 - type: artifactEffect
+  id: EffectWizChemTouch
+  targetDepth: 3
+  depthRange: 3
+  weight: 200 #to make up for how rare wizard origin + touch trigger is
+  effectHint: artifact-effect-hint-biochemical
+  triggerWhitelist:
+    - GenericTouch
+  originWhitelist:
+    - Wizard
+  components:
+  - type: ChemicalInjectArtifact
+    onlyInjectsActivator: true
+    reagentCount: 4
+    reagentFill:
+      Ichor: [ 5, 10 ]
+      Cognizine: [ 5, 10 ]
+      Artifexium: [ 5, 10 ]
+      SoapReagent: [ 10, 20 ]
+      Phlogiston: [ 5, 15 ]
+      MuteToxin: [ 5, 25 ]
+      Honk: [ 5, 25 ]
+      JuiceThatMakesYouWeh: [ 5, 15 ]
+      Leporazine: [ 10, 25 ]
+      Omnizine: [ 5, 15 ]
+      Desoxyephedrine: [ 5, 30 ]
+      Happiness: [ 5, 25 ]
+      SpaceDrugs: [ 5, 25 ]
+      Pax: [ 5, 25 ]
+      Lead: [ 2, 8 ]
+      Haloperidol: [ 5, 25 ]
+      Tazinide: [ 2, 10 ]
+      Nutriment: [ 10, 40 ]
+      Fresium: [ 5, 25 ]
+      BuzzochloricBees: [ 5, 15 ]
+      Histamine: [ 5, 15 ]
+      Barozine: [ 5, 25 ]
+
+- type: artifactEffect
+  id: EffectSilent
+  targetDepth: 2
+  weight: .2
+  effectHint: artifact-effect-hint-biochemical
+  components:
+  - type: ChemicalInjectArtifact
+    radius: 7
+    reagentFill:
+      MuteToxin: [ 10, 20 ]
+
+- type: artifactEffect
+  id: EffectSleepy
+  targetDepth: 4
+  weight: 55.1
+  effectHint: artifact-effect-hint-biochemical
+  components:
+  - type: ChemicalInjectArtifact
+    radius: 6
+    reagentFill:
+      Nocturine: [ 10, 15 ]
+      ChloralHydrate: [ 15, 20 ]
+
+- type: artifactEffect
   id: EffectEmp
   targetDepth: 2
   depthRange: 3
@@ -580,7 +641,6 @@
 - type: artifactEffect
   id: EffectPolyMonkey
   targetDepth: 2
-  depthRange: 2
   weight: .4
   effectHint: artifact-effect-hint-polymorph
   components:
@@ -589,7 +649,6 @@
 - type: artifactEffect
   id: EffectPolyLizard
   targetDepth: 2
-  depthRange: 2
   weight: .4
   effectHint: artifact-effect-hint-polymorph
   components:
@@ -750,9 +809,9 @@
 
 - type: artifactEffect
   id: EffectSingulo
-  targetDepth: 15
+  targetDepth: 13
   depthRange: 5
-  weight: .1
+  weight: .3
   effectHint: artifact-effect-hint-destruction
   components:
   - type: SpawnArtifact
@@ -762,9 +821,9 @@
 
 - type: artifactEffect
   id: EffectTesla
-  targetDepth: 15
+  targetDepth: 13
   depthRange: 5
-  weight: .1
+  weight: .3
   effectHint: artifact-effect-hint-destruction
   components:
   - type: SpawnArtifact

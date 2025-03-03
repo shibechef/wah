@@ -88,6 +88,7 @@ public sealed partial class ArtifactSystem
             .Where(x => _whitelistSystem.IsWhitelistPassOrNull(x.Whitelist, artifact) &&
             _whitelistSystem.IsBlacklistFailOrNull(x.Blacklist, artifact) &&
             IsTriggerValid(EntityManager.GetComponent<ArtifactComponent>(artifact), x)).ToList();
+        _random.Shuffle(allTriggers);
 
         //get the sum of weights
         var sum = 0.0f;
@@ -116,6 +117,7 @@ public sealed partial class ArtifactSystem
             .Where(x => _whitelistSystem.IsWhitelistPassOrNull(x.Whitelist, artifact) &&
             _whitelistSystem.IsBlacklistFailOrNull(x.Blacklist, artifact) &&
             IsEffectValid(EntityManager.GetComponent<ArtifactComponent>(artifact), trigger, x)).ToList();
+        _random.Shuffle(allEffects);
 
         //get the sum of weights
         var sum = 0.0f;
@@ -142,14 +144,14 @@ public sealed partial class ArtifactSystem
     //It is 100% of the weight at the target depth, and decreases to 0% of the weight at the edge
     private float GetTriggerWeight(ArtifactTriggerPrototype trigger, int depth)
     {
-        return trigger.Weight * (1.0f - MathF.Abs(depth - trigger.TargetDepth) / (trigger.DepthRange + 1.0f));
+        return MathF.Max(0, trigger.Weight * (1.0f - MathF.Abs(depth - trigger.TargetDepth) / (trigger.DepthRange + 1.0f)));
     }
 
     //gets the weight of a trigger at a depth
     //It is 100% of the weight at the target depth, and decreases to 0% of the weight at the edge
     private float GetEffectWeight(ArtifactEffectPrototype effect, int depth)
     {
-        return effect.Weight * (1.0f - MathF.Abs(depth - effect.TargetDepth) / (effect.DepthRange + 1.0f));
+        return MathF.Max(0, effect.Weight * (1.0f - MathF.Abs(depth - effect.TargetDepth) / (effect.DepthRange + 1.0f)));
     }
 
     /// <summary>
