@@ -138,7 +138,7 @@
   originWhitelist:
     - Silicon
   triggerWhitelist:
-    - SiliconTouch
+    - TriggerSiliconTouch
   components:
   - type: PointLight
     radius: 10
@@ -572,10 +572,10 @@
   id: EffectWizChemTouch
   targetDepth: 3
   depthRange: 3
-  weight: 200 #to make up for how rare wizard origin + touch trigger is
+  weight: 2 #to make up for how rare wizard origin + nonitem + touch trigger is
   effectHint: artifact-effect-hint-biochemical
   triggerWhitelist:
-    - GenericTouch
+    - TriggerTouch
   originWhitelist:
     - Wizard
   components:
@@ -620,7 +620,7 @@
 - type: artifactEffect
   id: EffectSleepy
   targetDepth: 4
-  weight: 55.1
+  weight: .1
   effectHint: artifact-effect-hint-biochemical
   components:
   - type: ChemicalInjectArtifact

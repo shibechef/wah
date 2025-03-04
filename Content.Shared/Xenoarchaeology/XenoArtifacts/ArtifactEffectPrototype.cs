@@ -68,12 +68,12 @@ public sealed partial class ArtifactEffectPrototype : IPrototype
 
     [DataField("blacklist")]
     public EntityWhitelist? Blacklist;
+
     /// <summary>
     /// Restricts what triggers can cause this effect
     /// </summary>
-
     [DataField("triggerWhitelist")]
-    public List<ArtifactTriggerPrototype>? TriggerWhitelist;
+    public List<ProtoId<ArtifactTriggerPrototype>>? TriggerWhitelist;
 
     /// <summary>
     /// Artifact types that can have this effect, leave blank for all

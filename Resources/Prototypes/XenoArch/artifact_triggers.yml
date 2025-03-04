@@ -80,7 +80,8 @@
 
 - type: artifactTrigger
   id: TriggerItemLanded
-  depthRange: 100
+  depthRange: 10
+  weight: .5
   triggerHint: artifact-trigger-hint-land
   whitelist:
     components:
@@ -97,8 +98,8 @@
 
 - type: artifactTrigger #has dangerous effects bound to only it, and generally more dangerous to be in touching range to an arti...
   id: TriggerTouch
-  depthRange: 100
-  weight: 500
+  depthRange: 10
+  weight: .5
   originWhitelist:
     - Wizard
     - Eldritch
@@ -114,7 +115,8 @@
 
 - type: artifactTrigger
   id: TriggerSiliconTouch
-  depthRange: 100
+  depthRange: 10
+  weight: .5
   triggerHint: artifact-trigger-hint-heat
   originWhitelist:
     - Silicon
@@ -153,8 +155,8 @@
 
 - type: artifactTrigger
   id: TriggerBlood
-  targetDepth: 1
-  depthRange: 3
+  depthRange: 10
+  weight: .5
   triggerHint: artifact-trigger-hint-blood
   originWhitelist:
     - Eldritch
