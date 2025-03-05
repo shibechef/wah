@@ -48,7 +48,7 @@ public sealed class ContinuousTelepathicArtifactSystem : EntitySystem
     {
         var messageId = _random.Pick(comp.Messages);
         var message = Loc.GetString(messageId);
-        _popupSystem.PopupEntity(message, comp.Holder, comp.Holder);
+        _popupSystem.PopupEntity(message, comp.Holder, comp.Holder, comp.PopupType);
         comp.NextMessageTime = _gameTiming.CurTime + TimeSpan.FromSeconds(_random.NextDouble(comp.MinTime.TotalSeconds, comp.MaxTime.TotalSeconds));
     }
 }

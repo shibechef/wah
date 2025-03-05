@@ -133,8 +133,7 @@
 
 - type: artifactEffect #slower than a pick but better structural per second; half the structural as a diamond drill
   id: EffectDemolisher
-  targetDepth: 4
-  depthRange: 2
+  targetDepth: 3
   weight: .4
   effectHint: artifact-effect-hint-drill
   whitelist:
@@ -154,10 +153,9 @@
     soundHit:
       path: "/Audio/Weapons/smash.ogg"
 
-- type: artifactEffect #worse than a fire axe
+- type: artifactEffect #worse than a fire axe in dps and nae structural
   id: EffectScythe
   targetDepth: 4
-  depthRange: 2
   weight: .4
   effectHint: artifact-effect-hint-drill
   originWhitelist:
@@ -217,7 +215,9 @@
 
 - type: artifactEffect
   id: EffectBigIron
-  targetDepth: 3
+  targetDepth: 4
+  depthRange: 22
+  weight: 5.5
   effectHint: artifact-effect-hint-gun
   whitelist:
     components:
@@ -246,6 +246,98 @@
     - FullAuto # no alien revolver in buildings
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/revolver.ogg
+  - type: ContinuousTelepathicArtifact
+    messages:
+    - heldeldritch-artifact-1
+    - heldeldritch-artifact-2
+    - heldeldritch-artifact-3
+    - heldeldritch-artifact-4
+    - heldeldritch-artifact-5
+    - heldeldritch-artifact-6
+    - heldeldritch-artifact-7
+    - heldeldritch-artifact-8
+    - heldeldritch-artifact-9
+    - heldeldritch-artifact-10
+    - heldeldritch-artifact-11
+    - heldeldritch-artifact-12
+    - heldeldritch-artifact-13
+    - heldeldritch-artifact-14
+    - heldeldritch-artifact-15
+    - heldeldritch-artifact-16
+    - heldeldritch-artifact-17
+    - heldeldritch-artifact-18
+    - heldeldritch-artifact-19
+    - heldeldritch-artifact-20
+
+- type: artifactEffect #fits one round, of pretty much any kind of ammo but grenades, not very good. a pneumatic cannon would be cooler but it cant seem to work
+  id: EffectLauncher
+  targetDepth: 3
+  weight: .5
+  effectHint: artifact-effect-hint-gun
+  whitelist:
+    components:
+    - Item
+  originWhitelist:
+    - Precursor
+  permanentComponents:
+  - type: AmmoCounter
+  - type: Gun
+    fireRate: 1
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgeRocket
+      - ShellShotgun
+      - CartridgeLightRifle
+      - CartridgePistol
+      - CartridgeCaselessRifle
+      - CartridgeMagnum
+      - BulletFoam
+      - CartridgeRifle
+      - CartridgeAntiMateriel
+      components:
+      - CreamPie
+      - Ensnaring
+    capacity: 1
+    proto: ShellShotgunBeanbag
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+
+- type: artifactEffect #lol ranged diamond tipped drill but needs to recharge
+  id: EffectLaserDrill
+  targetDepth: 4
+  weight: .5
+  effectHint: artifact-effect-hint-gun
+  whitelist:
+    components:
+    - Item
+  originWhitelist:
+    - Martian
+  permanentComponents:
+  - type: AmmoCounter
+  - type: Gun
+    fireRate: 4
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: Battery
+    maxCharge: 500
+    startingCharge: 500
+  - type: ProjectileBatteryAmmoProvider
+    proto: MiningBolt
+    fireCost: 10
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 40
+    autoRechargePause: true
+    autoRechargePauseTime: 2
 
 - type: artifactEffect
   id: EffectSentience

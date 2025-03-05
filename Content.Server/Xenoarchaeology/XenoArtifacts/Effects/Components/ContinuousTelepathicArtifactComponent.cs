@@ -1,3 +1,4 @@
+using Content.Shared.Popups;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.Xenoarchaeology.XenoArtifacts.Effects.Components;
@@ -17,6 +18,13 @@ public sealed partial class ContinuousTelepathicArtifactComponent : Component
     public List<string> Messages = default!;
 
     /// <summary>
+    ///     How the popup text shows up
+    /// </summary>
+    [DataField("popupType")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public PopupType PopupType = PopupType.Medium;
+
+    /// <summary>
     ///     Max time between messages
     /// </summary>
     [DataField("maxTime")]
@@ -28,7 +36,7 @@ public sealed partial class ContinuousTelepathicArtifactComponent : Component
     /// </summary>
     [DataField("minTime")]
     [ViewVariables(VVAccess.ReadWrite)]
-    public TimeSpan MinTime = TimeSpan.FromSeconds(4);
+    public TimeSpan MinTime = TimeSpan.FromSeconds(6);
 
     /// <summary>
     ///     The next time a message will be sent

@@ -1,3 +1,5 @@
+using Content.Shared.Popups;
+
 namespace Content.Server.Xenoarchaeology.XenoArtifacts.Effects.Components;
 
 /// <summary>
@@ -29,6 +31,13 @@ public sealed partial class TelepathicArtifactComponent : Component
     [DataField("drasticProb")]
     [ViewVariables(VVAccess.ReadWrite)]
     public float DrasticMessageProb = 0.2f;
+
+    /// <summary>
+    ///     How the popup text shows up
+    /// </summary>
+    [DataField("popupType")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public PopupType PopupType = PopupType.Medium;
 
     /// <summary>
     ///     Radius in which player can receive artifacts messages.

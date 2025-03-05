@@ -807,11 +807,22 @@
   components:
   - type: PortalArtifact
 
-- type: artifactEffect
+- type: artifactEffect #slightly short of station wide destruction, silicon arti only
+  id: EffectIonStorm
+  targetDepth: 6
+  weight: .3
+  originWhitelist:
+  - Silicon
+  effectHint: artifact-effect-hint-electrical-interference
+  components:
+  - type: GameRuleArtifact
+    addedGameRule: "IonStorm"
+
+- type: artifactEffect #earliest at depth 8, which is VERY rare to get to
   id: EffectSingulo
   targetDepth: 13
   depthRange: 5
-  weight: .3
+  weight: .5
   effectHint: artifact-effect-hint-destruction
   components:
   - type: SpawnArtifact
@@ -823,7 +834,7 @@
   id: EffectTesla
   targetDepth: 13
   depthRange: 5
-  weight: .3
+  weight: .5
   effectHint: artifact-effect-hint-destruction
   components:
   - type: SpawnArtifact

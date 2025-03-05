@@ -1,9 +1,23 @@
-- type: artifactTrigger
-  id: TriggerInteraction
+- type: artifactTrigger #items tend to mispredict to the empty handed pickup reaction
+  id: TriggerItemInteraction
   targetDepth: 0
   triggerHint: artifact-trigger-hint-physical
   components:
   - type: ArtifactInteractionTrigger
+    emptyHandActivation: false
+  whitelist:
+    components:
+    - Item
+
+- type: artifactTrigger
+  id: TriggerObjectInteraction
+  targetDepth: 0
+  triggerHint: artifact-trigger-hint-physical
+  components:
+  - type: ArtifactInteractionTrigger
+  blacklist:
+    components:
+    - Item
 
 - type: artifactTrigger
   id: TriggerTimer
