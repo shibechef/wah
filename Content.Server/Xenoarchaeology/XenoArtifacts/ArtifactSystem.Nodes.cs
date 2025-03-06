@@ -88,7 +88,6 @@ public sealed partial class ArtifactSystem
             .Where(x => _whitelistSystem.IsWhitelistPassOrNull(x.Whitelist, artifact) &&
             _whitelistSystem.IsBlacklistFailOrNull(x.Blacklist, artifact) &&
             IsTriggerValid(EntityManager.GetComponent<ArtifactComponent>(artifact), x)).ToList();
-        _random.Shuffle(allTriggers);
 
         //get the sum of weights
         var sum = 0.0f;
@@ -117,7 +116,6 @@ public sealed partial class ArtifactSystem
             .Where(x => _whitelistSystem.IsWhitelistPassOrNull(x.Whitelist, artifact) &&
             _whitelistSystem.IsBlacklistFailOrNull(x.Blacklist, artifact) &&
             IsEffectValid(EntityManager.GetComponent<ArtifactComponent>(artifact), trigger, x)).ToList();
-        _random.Shuffle(allEffects);
 
         //get the sum of weights
         var sum = 0.0f;

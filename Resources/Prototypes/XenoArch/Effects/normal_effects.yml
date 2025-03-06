@@ -148,11 +148,15 @@
   - type: FlashOnTrigger
     range: 6
 
-#- type: artifactEffect
-#  id: SurroundingDarkness
-#  targetDepth: 3
-#  originWhitelist:
-#    - Eldritch
+- type: artifactEffect
+  id: SurroundingDarkness
+  targetDepth: 3
+  depthRange: 55
+  weight: 55.5
+  originWhitelist:
+    - Eldritch
+  components:
+  - type: DisableLights
 
 - type: artifactEffect #bornana
   id: EffectBananaSpawn

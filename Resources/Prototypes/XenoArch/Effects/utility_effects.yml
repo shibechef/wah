@@ -291,7 +291,6 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - CartridgeRocket
       - ShellShotgun
       - CartridgeLightRifle
       - CartridgePistol
