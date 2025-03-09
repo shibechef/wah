@@ -52,19 +52,18 @@ public sealed class DisableLightsArtifactSystem : EntitySystem
     //LitOnPowered for vending machines and arcades
     private void FindLights(EntityUid uid, DisableLightsArtifactComponent component)
     {
-        var disableTime = component.UpdateFrequency * 1.1f;
         var ents = _entityLookup.GetEntitiesInRange(_transform.GetMapCoordinates(uid), component.Range, LookupFlags.Uncontained);
         foreach (var ent in ents)
         {
             if (HasComp<PoweredLightComponent>(ent) || HasComp<LitOnPoweredComponent>(ent))
             {
                 var disabled = EnsureComp<DisabledLightComponent>(ent);
-                disabled.DisabledUntil = _timing.CurTime + disableTime;
+                disabled.DisabledUntil = _timing.CurTime + component.DisableTime;
             }
             else if (HasComp<HandheldLightComponent>(ent) && (HasComp<BatteryComponent>(ent) || HasComp<PowerCellSlotComponent>(ent)))
             {
                 var disabled = EnsureComp<DisabledLightComponent>(ent);
-                disabled.DisabledUntil = _timing.CurTime + disableTime;
+                disabled.DisabledUntil = _timing.CurTime + component.DisableTime;
             }
         }
     }

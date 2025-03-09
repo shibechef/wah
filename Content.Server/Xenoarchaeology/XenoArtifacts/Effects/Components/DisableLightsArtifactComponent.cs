@@ -17,6 +17,12 @@ public sealed partial class DisableLightsArtifactComponent : Component
     [DataField("updateFrequency")]
     public TimeSpan UpdateFrequency = TimeSpan.FromSeconds(1.5f);
 
+    /// <summary>
+    /// How long the light is disabled for
+    /// </summary>
+    [DataField("disableTime")]
+    public TimeSpan DisableTime = TimeSpan.FromSeconds(5f);
+
     [DataField("range")]
     public float Range = 8f;
 }
